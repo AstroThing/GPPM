@@ -1,0 +1,3 @@
+verilog work "../GPPM/Reg_File.v"
+verilog work "../GPPM/ALU.v"
+verilog work "../GPPM/GPPM.v"

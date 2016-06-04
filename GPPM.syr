@@ -1,0 +1,587 @@
+Release 14.7 - xst P.20131013 (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.16 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.17 secs
+ 
+--> Reading design: GPPM.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "GPPM.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "GPPM"
+Output Format                      : NGC
+Target Device                      : xc3s500e-5-ft256
+
+---- Source Options
+Top Module Name                    : GPPM
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "../GPPM/Reg_File.v" in library work
+Compiling verilog file "../GPPM/ALU.v" in library work
+Module <Reg_File> compiled
+Compiling verilog file "../GPPM/GPPM.v" in library work
+Module <ALU> compiled
+Module <GPPM> compiled
+No errors in compilation
+Analysis of file <"GPPM.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <GPPM> in library <work>.
+
+Analyzing hierarchy for module <Reg_File> in library <work>.
+
+Analyzing hierarchy for module <ALU> in library <work> with parameters.
+	ADD = "0000"
+	AND = "0100"
+	DECREMENT = "1001"
+	DIV = "0011"
+	EQUALS = "0111"
+	GREATER_OR_EQUAL = "1100"
+	GREATER_THAN = "1011"
+	INCREMENT = "1000"
+	LESS_THAN = "1010"
+	LESS_THAN_OR_EQUAL = "1101"
+	MULT = "0010"
+	NOT = "0101"
+	OR = "0110"
+	SUB = "0001"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <GPPM>.
+Module <GPPM> is correct for synthesis.
+ 
+Analyzing module <Reg_File> in library <work>.
+Module <Reg_File> is correct for synthesis.
+ 
+Analyzing module <ALU> in library <work>.
+	ADD = 4'b0000
+	AND = 4'b0100
+	DECREMENT = 4'b1001
+	DIV = 4'b0011
+	EQUALS = 4'b0111
+	GREATER_OR_EQUAL = 4'b1100
+	GREATER_THAN = 4'b1011
+	INCREMENT = 4'b1000
+	LESS_THAN = 4'b1010
+	LESS_THAN_OR_EQUAL = 4'b1101
+	MULT = 4'b0010
+	NOT = 4'b0101
+	OR = 4'b0110
+	SUB = 4'b0001
+Module <ALU> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <Reg_File>.
+    Related source file is "../GPPM/Reg_File.v".
+    Found 32x32-bit dual-port RAM <Mram_registers> for signal <registers>.
+    Found 32x32-bit dual-port RAM <Mram_registers_ren> for signal <registers>.
+    Summary:
+	inferred   2 RAM(s).
+Unit <Reg_File> synthesized.
+
+
+Synthesizing Unit <ALU>.
+    Related source file is "../GPPM/ALU.v".
+WARNING:Xst:643 - "../GPPM/ALU.v" line 32: The result of a 32x32-bit multiplication is partially used. Only the 32 least significant bits are used. If you are doing this on purpose, you may safely ignore this warning. Otherwise, make sure you are not losing information, leading to unexpected circuit behavior.
+    Found 32-bit addsub for signal <result$addsub0000>.
+    Found 32-bit comparator equal for signal <result$cmp_eq0001> created at line 36.
+    Found 32-bit comparator greatequal for signal <result$cmp_ge0000> created at line 41.
+    Found 32-bit comparator greater for signal <result$cmp_gt0000> created at line 40.
+    Found 32-bit comparator lessequal for signal <result$cmp_le0000> created at line 42.
+    Found 32-bit comparator less for signal <result$cmp_lt0000> created at line 39.
+    Found 32x32-bit multiplier for signal <result$mult0001> created at line 32.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Multiplier(s).
+	inferred   5 Comparator(s).
+Unit <ALU> synthesized.
+
+
+Synthesizing Unit <GPPM>.
+    Related source file is "../GPPM/GPPM.v".
+WARNING:Xst:647 - Input <instruction<63:54>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+Unit <GPPM> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 2
+ 32x32-bit dual-port RAM                               : 2
+# Multipliers                                          : 1
+ 32x32-bit multiplier                                  : 1
+# Adders/Subtractors                                   : 1
+ 32-bit addsub                                         : 1
+# Comparators                                          : 5
+ 32-bit comparator equal                               : 1
+ 32-bit comparator greatequal                          : 1
+ 32-bit comparator greater                             : 1
+ 32-bit comparator less                                : 1
+ 32-bit comparator lessequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <Reg_File>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_registers> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <we>            | high     |
+    |     addrA          | connected to signal <wa>            |          |
+    |     diA            | connected to signal <wd>            |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     addrB          | connected to signal <ra1>           |          |
+    |     doB            | connected to signal <rd1>           |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_registers_ren> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <we>            | high     |
+    |     addrA          | connected to signal <wa>            |          |
+    |     diA            | connected to signal <wd>            |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     addrB          | connected to signal <ra2>           |          |
+    |     doB            | connected to signal <rd2>           |          |
+    -----------------------------------------------------------------------
+Unit <Reg_File> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 2
+ 32x32-bit dual-port distributed RAM                   : 2
+# Multipliers                                          : 1
+ 32x32-bit multiplier                                  : 1
+# Adders/Subtractors                                   : 1
+ 32-bit addsub                                         : 1
+# Comparators                                          : 5
+ 32-bit comparator equal                               : 1
+ 32-bit comparator greatequal                          : 1
+ 32-bit comparator greater                             : 1
+ 32-bit comparator less                                : 1
+ 32-bit comparator lessequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:2677 - Node <Mmult_result_mult0001_submult_11> of sequential type is unconnected in block <ALU>.
+
+Optimizing unit <GPPM> ...
+
+Optimizing unit <ALU> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block GPPM, actual ratio is 6.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Found no macro
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : GPPM.ngr
+Top Level Output File Name         : GPPM
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 65
+
+Cell Usage :
+# BELS                             : 668
+#      GND                         : 1
+#      LUT2                        : 36
+#      LUT3                        : 149
+#      LUT3_L                      : 1
+#      LUT4                        : 224
+#      LUT4_D                      : 15
+#      LUT4_L                      : 15
+#      MUXCY                       : 147
+#      MUXF5                       : 17
+#      VCC                         : 1
+#      XORCY                       : 62
+# RAMS                             : 128
+#      RAM16X1D                    : 128
+# Clock Buffers                    : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 54
+#      IBUF                        : 53
+#      OBUF                        : 1
+# MULTs                            : 3
+#      MULT18X18SIO                : 3
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s500eft256-5 
+
+ Number of Slices:                      310  out of   4656     6%  
+ Number of 4 input LUTs:                696  out of   9312     7%  
+    Number used as logic:               440
+    Number used as RAMs:                256
+ Number of IOs:                          65
+ Number of bonded IOBs:                  55  out of    190    28%  
+ Number of MULT18X18SIOs:                 3  out of     20    15%  
+ Number of GCLKs:                         1  out of     24     4%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+instruction<0>                     | BUFGP                  | 128   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -5
+
+   Minimum period: 13.943ns (Maximum Frequency: 71.719MHz)
+   Minimum input arrival time before clock: 15.089ns
+   Maximum output required time after clock: 19.081ns
+   Maximum combinational path delay: 20.226ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'instruction<0>'
+  Clock period: 13.943ns (frequency: 71.719MHz)
+  Total number of paths / destination ports: 532072 / 128
+-------------------------------------------------------------------------
+Delay:               13.943ns (Levels of Logic = 21)
+  Source:            rf/Mram_registers27 (RAM)
+  Destination:       rf/Mram_registers63 (RAM)
+  Source Clock:      instruction<0> rising
+  Destination Clock: instruction<0> rising
+
+  Data Path: rf/Mram_registers27 to rf/Mram_registers63
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAM16X1D:WCLK->DPO    2   1.654   0.449  rf/Mram_registers27 (N57)
+     LUT3:I1->O            8   0.612   0.643  inst_LPM_MUX1311 (rd1<13>)
+     MULT18X18SIO:A13->P17    1   4.331   0.426  alu/Mmult_result_mult0001_submult_0 (alu/Mmult_result_mult0001_submult_0_P_to_Adder_A_17)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_submult_00_Madd_lut<17> (alu/Mmult_result_mult0001_submult_00_Madd_lut<17>)
+     MUXCY:S->O            1   0.404   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<17> (alu/Mmult_result_mult0001_submult_00_Madd_cy<17>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<18> (alu/Mmult_result_mult0001_submult_00_Madd_cy<18>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<19> (alu/Mmult_result_mult0001_submult_00_Madd_cy<19>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<20> (alu/Mmult_result_mult0001_submult_00_Madd_cy<20>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<21> (alu/Mmult_result_mult0001_submult_00_Madd_cy<21>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<22> (alu/Mmult_result_mult0001_submult_00_Madd_cy<22>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<23> (alu/Mmult_result_mult0001_submult_00_Madd_cy<23>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<24> (alu/Mmult_result_mult0001_submult_00_Madd_cy<24>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<25> (alu/Mmult_result_mult0001_submult_00_Madd_cy<25>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<26> (alu/Mmult_result_mult0001_submult_00_Madd_cy<26>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<27> (alu/Mmult_result_mult0001_submult_00_Madd_cy<27>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<28> (alu/Mmult_result_mult0001_submult_00_Madd_cy<28>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<29> (alu/Mmult_result_mult0001_submult_00_Madd_cy<29>)
+     XORCY:CI->O           1   0.699   0.426  alu/Mmult_result_mult0001_submult_00_Madd_xor<30> (alu/Mmult_result_mult0001_submult_0_30)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_Madd_lut<30> (alu/Mmult_result_mult0001_Madd_lut<30>)
+     MUXCY:S->O            0   0.404   0.000  alu/Mmult_result_mult0001_Madd_cy<30> (alu/Mmult_result_mult0001_Madd_cy<30>)
+     XORCY:CI->O           2   0.699   0.410  alu/Mmult_result_mult0001_Madd_xor<31> (alu/result_mult0001<31>)
+     LUT3:I2->O            4   0.612   0.000  wd<31>1 (wd<31>)
+     RAM16X1D:D                0.332          rf/Mram_registers63
+    ----------------------------------------
+    Total                     13.943ns (11.589ns logic, 2.354ns route)
+                                       (83.1% logic, 16.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'instruction<0>'
+  Total number of paths / destination ports: 2419616 / 1280
+-------------------------------------------------------------------------
+Offset:              15.089ns (Levels of Logic = 23)
+  Source:            instruction<1> (PAD)
+  Destination:       rf/Mram_registers63 (RAM)
+  Destination Clock: instruction<0> rising
+
+  Data Path: instruction<1> to rf/Mram_registers63
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            64   1.106   1.081  instruction_1_IBUF (instruction_1_IBUF)
+     RAM16X1D:DPRA0->DPO    2   0.612   0.449  rf/Mram_registers5 (N13)
+     LUT3:I1->O            8   0.612   0.643  inst_LPM_MUX2111 (rd1<2>)
+     MULT18X18SIO:A2->P17    1   4.331   0.426  alu/Mmult_result_mult0001_submult_0 (alu/Mmult_result_mult0001_submult_0_P_to_Adder_A_17)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_submult_00_Madd_lut<17> (alu/Mmult_result_mult0001_submult_00_Madd_lut<17>)
+     MUXCY:S->O            1   0.404   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<17> (alu/Mmult_result_mult0001_submult_00_Madd_cy<17>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<18> (alu/Mmult_result_mult0001_submult_00_Madd_cy<18>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<19> (alu/Mmult_result_mult0001_submult_00_Madd_cy<19>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<20> (alu/Mmult_result_mult0001_submult_00_Madd_cy<20>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<21> (alu/Mmult_result_mult0001_submult_00_Madd_cy<21>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<22> (alu/Mmult_result_mult0001_submult_00_Madd_cy<22>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<23> (alu/Mmult_result_mult0001_submult_00_Madd_cy<23>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<24> (alu/Mmult_result_mult0001_submult_00_Madd_cy<24>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<25> (alu/Mmult_result_mult0001_submult_00_Madd_cy<25>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<26> (alu/Mmult_result_mult0001_submult_00_Madd_cy<26>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<27> (alu/Mmult_result_mult0001_submult_00_Madd_cy<27>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<28> (alu/Mmult_result_mult0001_submult_00_Madd_cy<28>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<29> (alu/Mmult_result_mult0001_submult_00_Madd_cy<29>)
+     XORCY:CI->O           1   0.699   0.426  alu/Mmult_result_mult0001_submult_00_Madd_xor<30> (alu/Mmult_result_mult0001_submult_0_30)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_Madd_lut<30> (alu/Mmult_result_mult0001_Madd_lut<30>)
+     MUXCY:S->O            0   0.404   0.000  alu/Mmult_result_mult0001_Madd_cy<30> (alu/Mmult_result_mult0001_Madd_cy<30>)
+     XORCY:CI->O           2   0.699   0.410  alu/Mmult_result_mult0001_Madd_xor<31> (alu/result_mult0001<31>)
+     LUT3:I2->O            4   0.612   0.000  wd<31>1 (wd<31>)
+     RAM16X1D:D                0.332          rf/Mram_registers63
+    ----------------------------------------
+    Total                     15.089ns (11.653ns logic, 3.436ns route)
+                                       (77.2% logic, 22.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'instruction<0>'
+  Total number of paths / destination ports: 130848 / 1
+-------------------------------------------------------------------------
+Offset:              19.081ns (Levels of Logic = 23)
+  Source:            rf/Mram_registers27 (RAM)
+  Destination:       isZero (PAD)
+  Source Clock:      instruction<0> rising
+
+  Data Path: rf/Mram_registers27 to isZero
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAM16X1D:WCLK->DPO    2   1.654   0.449  rf/Mram_registers27 (N57)
+     LUT3:I1->O            8   0.612   0.643  inst_LPM_MUX1311 (rd1<13>)
+     MULT18X18SIO:A13->P17    1   4.331   0.426  alu/Mmult_result_mult0001_submult_0 (alu/Mmult_result_mult0001_submult_0_P_to_Adder_A_17)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_submult_00_Madd_lut<17> (alu/Mmult_result_mult0001_submult_00_Madd_lut<17>)
+     MUXCY:S->O            1   0.404   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<17> (alu/Mmult_result_mult0001_submult_00_Madd_cy<17>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<18> (alu/Mmult_result_mult0001_submult_00_Madd_cy<18>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<19> (alu/Mmult_result_mult0001_submult_00_Madd_cy<19>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<20> (alu/Mmult_result_mult0001_submult_00_Madd_cy<20>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<21> (alu/Mmult_result_mult0001_submult_00_Madd_cy<21>)
+     XORCY:CI->O           1   0.699   0.426  alu/Mmult_result_mult0001_submult_00_Madd_xor<22> (alu/Mmult_result_mult0001_submult_0_22)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_Madd_lut<22> (alu/Mmult_result_mult0001_Madd_lut<22>)
+     MUXCY:S->O            1   0.404   0.000  alu/Mmult_result_mult0001_Madd_cy<22> (alu/Mmult_result_mult0001_Madd_cy<22>)
+     XORCY:CI->O           2   0.699   0.532  alu/Mmult_result_mult0001_Madd_xor<23> (alu/result_mult0001<23>)
+     LUT4:I0->O            1   0.612   0.509  alu/result<23>26 (result<23>)
+     LUT4:I0->O            1   0.612   0.000  alu/isZero_wg_lut<0> (alu/isZero_wg_lut<0>)
+     MUXCY:S->O            1   0.404   0.000  alu/isZero_wg_cy<0> (alu/isZero_wg_cy<0>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<1> (alu/isZero_wg_cy<1>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<2> (alu/isZero_wg_cy<2>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<3> (alu/isZero_wg_cy<3>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<4> (alu/isZero_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  alu/isZero_wg_cy<5> (alu/isZero_wg_cy<5>)
+     MUXCY:CI->O           1   0.052   0.000  alu/isZero_wg_cy<6> (alu/isZero_wg_cy<6>)
+     MUXCY:CI->O           1   0.399   0.357  alu/isZero_wg_cy<7> (isZero_OBUF)
+     OBUF:I->O                 3.169          isZero_OBUF (isZero)
+    ----------------------------------------
+    Total                     19.081ns (15.739ns logic, 3.342ns route)
+                                       (82.5% logic, 17.5% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 592473 / 1
+-------------------------------------------------------------------------
+Delay:               20.226ns (Levels of Logic = 25)
+  Source:            instruction<1> (PAD)
+  Destination:       isZero (PAD)
+
+  Data Path: instruction<1> to isZero
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            64   1.106   1.081  instruction_1_IBUF (instruction_1_IBUF)
+     RAM16X1D:DPRA0->DPO    2   0.612   0.449  rf/Mram_registers5 (N13)
+     LUT3:I1->O            8   0.612   0.643  inst_LPM_MUX2111 (rd1<2>)
+     MULT18X18SIO:A2->P17    1   4.331   0.426  alu/Mmult_result_mult0001_submult_0 (alu/Mmult_result_mult0001_submult_0_P_to_Adder_A_17)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_submult_00_Madd_lut<17> (alu/Mmult_result_mult0001_submult_00_Madd_lut<17>)
+     MUXCY:S->O            1   0.404   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<17> (alu/Mmult_result_mult0001_submult_00_Madd_cy<17>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<18> (alu/Mmult_result_mult0001_submult_00_Madd_cy<18>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<19> (alu/Mmult_result_mult0001_submult_00_Madd_cy<19>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<20> (alu/Mmult_result_mult0001_submult_00_Madd_cy<20>)
+     MUXCY:CI->O           1   0.052   0.000  alu/Mmult_result_mult0001_submult_00_Madd_cy<21> (alu/Mmult_result_mult0001_submult_00_Madd_cy<21>)
+     XORCY:CI->O           1   0.699   0.426  alu/Mmult_result_mult0001_submult_00_Madd_xor<22> (alu/Mmult_result_mult0001_submult_0_22)
+     LUT2:I1->O            1   0.612   0.000  alu/Mmult_result_mult0001_Madd_lut<22> (alu/Mmult_result_mult0001_Madd_lut<22>)
+     MUXCY:S->O            1   0.404   0.000  alu/Mmult_result_mult0001_Madd_cy<22> (alu/Mmult_result_mult0001_Madd_cy<22>)
+     XORCY:CI->O           2   0.699   0.532  alu/Mmult_result_mult0001_Madd_xor<23> (alu/result_mult0001<23>)
+     LUT4:I0->O            1   0.612   0.509  alu/result<23>26 (result<23>)
+     LUT4:I0->O            1   0.612   0.000  alu/isZero_wg_lut<0> (alu/isZero_wg_lut<0>)
+     MUXCY:S->O            1   0.404   0.000  alu/isZero_wg_cy<0> (alu/isZero_wg_cy<0>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<1> (alu/isZero_wg_cy<1>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<2> (alu/isZero_wg_cy<2>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<3> (alu/isZero_wg_cy<3>)
+     MUXCY:CI->O           1   0.051   0.000  alu/isZero_wg_cy<4> (alu/isZero_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  alu/isZero_wg_cy<5> (alu/isZero_wg_cy<5>)
+     MUXCY:CI->O           1   0.052   0.000  alu/isZero_wg_cy<6> (alu/isZero_wg_cy<6>)
+     MUXCY:CI->O           1   0.399   0.357  alu/isZero_wg_cy<7> (isZero_OBUF)
+     OBUF:I->O                 3.169          isZero_OBUF (isZero)
+    ----------------------------------------
+    Total                     20.226ns (15.803ns logic, 4.424ns route)
+                                       (78.1% logic, 21.9% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 7.00 secs
+ 
+--> 
+
+Total memory usage is 213696 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    3 (   0 filtered)
+Number of infos    :    3 (   0 filtered)
+

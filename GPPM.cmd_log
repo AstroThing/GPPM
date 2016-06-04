@@ -1,0 +1,5 @@
+xst -intstyle ise -ifn "C:/Users/nimer/Documents/Verilog Projects/Programmable/GPPM.xst" -ofn "C:/Users/nimer/Documents/Verilog Projects/Programmable/GPPM.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s500e-ft256-5 "GPPM.ngc" GPPM.ngd  
+map -intstyle ise -p xc3s500e-ft256-5 -cm area -ir off -pr off -c 100 -o GPPM_map.ncd GPPM.ngd GPPM.pcf 
+par -w -intstyle ise -ol high -t 1 GPPM_map.ncd GPPM.ncd GPPM.pcf 
+trce -intstyle ise -v 3 -s 5 -n 3 -fastpaths -xml GPPM.twx GPPM.ncd -o GPPM.twr GPPM.pcf 
